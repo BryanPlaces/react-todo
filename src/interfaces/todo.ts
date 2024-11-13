@@ -10,6 +10,10 @@ export interface TodoContextType {
   filteredTodos: TodoItemData[];
 }
 
+export interface TodoItemProps {
+  todo: TodoItemData
+}
+
 export interface TodoItemData {
   id: number,
   title: string,
