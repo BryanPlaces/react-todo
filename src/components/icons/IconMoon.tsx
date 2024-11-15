@@ -1,10 +1,10 @@
 
-type MoonIconProps = {
-  fill: string;
+type IconMoonProps = {
+  fill?: string;
   className?: string;
 };
 
-const MoonIcon = ({ fill = "#FFF", className }: MoonIconProps) => {
+const IconMoon = ({ fill = "#FFF", className }: IconMoonProps) => {
   return (
     <svg
       className = {className}
@@ -21,4 +21,4 @@ const MoonIcon = ({ fill = "#FFF", className }: MoonIconProps) => {
   );
  }
  
- export default MoonIcon;
+ export default IconMoon;

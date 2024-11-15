@@ -21,7 +21,7 @@ const TodoItem = ({ todo } : TodoItemProps) => {
         { completed && <IconCheck /> }
       </button>
 
-      <p className={`${ completed && "line-through" } grow text-gray-600`}>{ title }</p>
+      <p className={`${ completed && "line-through" } grow text-gray-600 dark:text-gray-400`}>{ title }</p>
       <button onClick={ () => deleteTodo(id) }><IconCross /></button>
     </article>
   );

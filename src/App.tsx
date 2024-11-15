@@ -5,7 +5,10 @@ import { TodoProvider } from './context/TodoContext.tsx';
 const App = () => {
 
   return (
-    <div className="bg-gray-300 min-h-screen bg-[url('./assets/images/bg-mobile-light.jpg')] bg-contain bg-no-repeat">
+    <div className="min-h-screen bg-contain bg-no-repeat
+      bg-gray-300 bg-[url('./assets/images/bg-mobile-light.jpg')]
+      dark:bg-gray-900 dark:bg-[url('./assets/images/bg-mobile-dark.jpg')]
+      transiton-all duration-1000">
       <Header />
       <main className="container mx-auto mt-8 px-4">
         <TodoProvider>
@@ -16,7 +19,7 @@ const App = () => {
         </TodoProvider>
       </main>
 
-      <footer className="mt-8 text-center text-gray-500">
+      <footer className="font-semibold mt-8 text-center text-gray-500">
         Drag and drop to reorder list
       </footer>
     </div>
