@@ -7,10 +7,12 @@ const App = () => {
   return (
     <div className="min-h-screen bg-contain bg-no-repeat
       bg-gray-300 bg-[url('./assets/images/bg-mobile-light.jpg')]
+      md:bg-[url('./assets/images/bg-desktop-light.jpg')]
       dark:bg-gray-900 dark:bg-[url('./assets/images/bg-mobile-dark.jpg')]
+      md:dark:bg-[url('./assets/images/bg-desktop-dark.jpg')]
       transiton-all duration-1000">
       <Header />
-      <main className="container mx-auto mt-8 px-4">
+      <main className="container mx-auto mt-8 px-4 md:max-w-xl">
         <TodoProvider>
           <TodoForm />
           <TodoList />

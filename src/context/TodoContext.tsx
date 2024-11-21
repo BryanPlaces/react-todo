@@ -1,13 +1,8 @@
-import { createContext, ReactNode, useMemo, useState } from "react";
+import { createContext, ReactNode, useEffect, useMemo, useState } from "react";
 import { TodoContextType, TodoItemData } from "../interfaces/todo";
 
-const initialState: Array<TodoItemData> = [
-  { id: 1, title: "Complete online Javascript blueeweb Curse", completed: true },
-  { id: 2, title: "Go to the gym", completed: true },
-  { id: 3, title: "10 minutes meditation", completed: false },
-  { id: 4, title: "Pick up groceries", completed: false },
-  { id: 5, title: "Complete todo app on Frontend Mentor", completed: false },
-];
+const storedTodos = localStorage.getItem('todos');
+const initialState: Array<TodoItemData> = storedTodos ? JSON.parse(storedTodos) : [];
 
 const FILTERS = {
   ALL: 'all',
@@ -55,6 +50,10 @@ const TodoProvider = ({ children }: { children: ReactNode }) => {
   }
 
   const changeFilter = (filter: string) => setFilter(filter);
+
+  useEffect(() => {
+    localStorage.setItem('todos', JSON.stringify(todos));
+  }, [todos])
 
   const filteredTodos = useMemo(() => {
     switch(filter) {
