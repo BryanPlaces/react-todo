@@ -1,5 +1,6 @@
 import { createContext, ReactNode, useEffect, useMemo, useState } from "react";
 import { TodoContextType, TodoItemData } from "../interfaces/todo";
+import { DropResult } from "@hello-pangea/dnd";
 
 const storedTodos = localStorage.getItem('todos');
 const initialState: Array<TodoItemData> = storedTodos ? JSON.parse(storedTodos) : [];
@@ -19,7 +20,8 @@ const TodoContext = createContext<TodoContextType>({
   updateTodo: () => {},
   deleteTodo: () => {},
   clearCompleted: () => {},
-  filteredTodos: []
+  filteredTodos: [],
+  handleDragEnd: () => {},
 });
 
 const TodoProvider = ({ children }: { children: ReactNode }) => {
@@ -68,6 +70,29 @@ const TodoProvider = ({ children }: { children: ReactNode }) => {
     }
   }, [todos, filter]);
 
+  // Drag and Drop section
+  const reorder = (list: TodoItemData[], startIndex: number, endIndex: number) => {
+    const result = [...list];
+    const [removed] = result.splice(startIndex, 1);
+    result.splice(endIndex, 0, removed);
+    return result;
+  };
+
+  const handleDragEnd = (result: DropResult) => {
+
+    const { destination, source } = result;
+
+    if (!destination || 
+      (source.index === destination.index &&
+      source.droppableId === destination.droppableId))
+      
+      return;
+
+    setTodos((prevTasks) =>
+      reorder(prevTasks, source.index, destination.index)
+    );
+  };
+
   return (
     <TodoContext.Provider value={{
       todos,
@@ -78,7 +103,8 @@ const TodoProvider = ({ children }: { children: ReactNode }) => {
       updateTodo,
       deleteTodo,
       clearCompleted,
-      filteredTodos 
+      filteredTodos,
+      handleDragEnd
     }}>
       { children }
     </TodoContext.Provider>

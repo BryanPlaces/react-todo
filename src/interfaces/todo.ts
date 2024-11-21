@@ -1,3 +1,5 @@
+import { DropResult } from "@hello-pangea/dnd";
+
 export interface TodoContextType {
   todos: TodoItemData[];
   filter: string;
@@ -8,9 +10,10 @@ export interface TodoContextType {
   deleteTodo: (id: number) => void;
   clearCompleted: () => void;
   filteredTodos: TodoItemData[];
+  handleDragEnd: (result: DropResult) => void;
 }
 
-export interface TodoItemProps {
+export interface TodoItemProps extends React.HTMLAttributes<HTMLElement> {
   todo: TodoItemData
 }
 
